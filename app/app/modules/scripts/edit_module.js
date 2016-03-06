@@ -1,8 +1,6 @@
 function getModuleDetail() {
   var module = QueryStringToJSON(window.location);
-
-
-  oauth2.getWithAuth("http://localhost/api/admin/modules/" + module.id + "/tree", function (data) {
+  oauth2.getWithAuth("/api/admin/modules/" + module.id + "/tree/", function (data) {
       var module = data;
       $('#edit_module_form').form('load', {
         name: module.name,
@@ -37,7 +35,7 @@ function loadSubNode(node) {
 }
 
 function loadSubFolder(node) {
-  oauth2.getWithAuth("http://localhost/api/admin/folders/" + node.id + "/sub_folder/", function (data) {
+  oauth2.getWithAuth("/admin/folders/" + node.id + "/sub_folder/", function (data) {
     $('#module_tree').tree('append', {
       parent: node.target,
       data: data

@@ -1,7 +1,7 @@
 
 function createModule(form) {
   ajaxLoading('Loading...');
-  oauth2.postAuth("http://localhost:8080/admin/modules",form.serializeObject(), function (data) {
+  oauth2.postAuth("/admin/modules/",form.serializeObject(), function (data) {
       ajaxLoadEnd();
       getModules();
       $('#create_module_win').window('close');
@@ -16,7 +16,7 @@ function createModule(form) {
 
 function getModules() {
   ajaxLoading('Loading...');
-  oauth2.getWithAuth("http://localhost:8080/admin/modules", function (data) {
+  oauth2.getWithAuth("/admin/modules/", function (data) {
       $('#modules_grid').datagrid({loadFilter: pagerFilter}).datagrid('loadData', data);
       ajaxLoadEnd();
     },

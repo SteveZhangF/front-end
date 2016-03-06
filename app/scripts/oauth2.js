@@ -98,7 +98,7 @@ oauth2.postAuth = function (url, data, success, error) {
  * Get with authentication
  */
 oauth2.getWithAuth = function (url, success, error) {
-
+  url="http://localhost/api/"+url;
   var authorization = oauth2.cookie.get('authToken')
 
   $.ajax({
@@ -118,7 +118,7 @@ oauth2.getWithAuth = function (url, success, error) {
  * Post with client basic authentication
  */
 oauth2.postClientAuth = function (url, data, success, error) {
-
+  url = "http://localhost/api/"+url;
     //var authorization = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse('353b302c44574f565045687e534e7d6a' + ':' + '286924697e615a672a646a493545646c'));
   var authorization = btoa('353b302c44574f565045687e534e7d6a' + ':' + '286924697e615a672a646a493545646c');
 

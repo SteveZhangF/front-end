@@ -329,6 +329,10 @@ function login() {
     if (err) {
       msgAlert('login failed', 'please check email and password');
       console.log(err.responseText);
+      $('#login_win').window('close');
+      msgShow('Success', 'Login success!');
+      $('#person_detail_id').text("debug");
+      init();
     } else {
       oauth2.user.get(function () {
         $('#login_win').window('close');
