@@ -1,3 +1,4 @@
+ 'use strict';
 oauth2.user = {}
 
 
@@ -14,7 +15,7 @@ oauth2.user.create = function (firstName, emailAddress, password, lastName, call
 
 
   oauth2.postClientAuth(
-    'v1.0/users',
+    'http://localhost:8080/users',
     {user :
       {
         "firstName" : firstName,
@@ -29,7 +30,6 @@ oauth2.user.create = function (firstName, emailAddress, password, lastName, call
       callback()
     },
     function(jqXHR, textStatus) {
-      console.log(jqXHR)
       callback(jqXHR)
     })
 
@@ -37,7 +37,7 @@ oauth2.user.create = function (firstName, emailAddress, password, lastName, call
 
 oauth2.clientAuth = function (clientId, secret) {
   var hash = [clientId + ':' + secret]
-  return CryptoJS.enc.Base64.stringify(hash)
+  return btoa(hash);
 }
 
 
@@ -48,14 +48,13 @@ oauth2.clientAuth = function (clientId, secret) {
 oauth2.user.download = function (callback) {
 
   oauth2.get(
-    'v1.0/me',
+    'http://localhost:8080/admin/me',
     {},
     function (response) {
-      console.log(response)
       // If the cached version is the same as the most recent
       // version, just return. Else, we will run the callback.
       if (store.get('userResponse') === JSON.stringify(response)) {
-        console.log('cached')
+        console.log('cached');
         return false
       }
 
@@ -86,16 +85,13 @@ oauth2.user.get = function (callback) {
 
   if (userResponse) {
     var response = JSON.parse(userResponse)
-    oauth2.user.user = response.user
+    oauth2.user.user = response
     // We still download the latest data in the background to make sure
     // cache is current. But we return immediately.
     oauth2.user.download(callback)
     return callback()
   }
-
-
   oauth2.user.download(callback)
-
 }
 
 /**
@@ -114,16 +110,14 @@ oauth2.user.is_logged_in = function () {
 oauth2.user.login = function (email, password, callback) {
 
   oauth2.login(
-    'oauth/token',
+    'http://localhost:8080/oauth/token',
       {
       "username" : email,
       "password" : password,
       "grant_type" : "password"
       },
     function (response) {
-        console.log(response)
       oauth2.cookie.set('authToken', response.access_token)
-      //oauth2.cookie.set('userId', response.apiUser.id)
       oauth2.cookie.set('email', email)
       callback()
 
@@ -143,7 +137,7 @@ oauth2.user.logout = function () {
   oauth2.cookie.remove('authToken')
   oauth2.cookie.remove('userId')
   oauth2.cookie.remove('email')
-  store.clear()
+  store.clear();
   window.location = 'index.html'
 }
 

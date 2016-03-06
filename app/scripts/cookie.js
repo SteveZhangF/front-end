@@ -1,6 +1,7 @@
 /**
  * Holds cookie methods
  */
+ 'use strict';
 oauth2.cookie = {}
 
 /**

@@ -1,14 +1,24 @@
 [
     {
-        "group": "分类1",
-        "icon":"icon-sum",
+        "group": "Users",
+        "icon":"icon-man",
         "data": [
             {
-                "title": "message 示例",
+                "title": "Users",
                 "icon": "images/left-menu/edit_48.png",
-                "url": "app/message/index.html",
+                "url": "app/users/index.html",
                 "type":1
             },
+          { "title":"Modules",
+            "icon":"images/left-menu/edit_48.png",
+            "url": "app/modules/index.html",
+            "type":1
+          },
+          { "title":"Entities",
+              "icon":"images/left-menu/edit_48.png",
+            "url": "app/entities/index.html",
+            "type":1
+          },
             {
                 "title": "desktop 桌面图标",
                 "icon": "images/left-menu/edit_48.png",

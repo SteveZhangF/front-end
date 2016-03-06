@@ -1,0 +1,109 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <link id="easyui_theme_id" rel="stylesheet" type="text/css"
+        href="../../bower_components/jquery.easyui/themes/default/easyui.css">
+  <link rel="stylesheet" type="text/css" href="../../bower_components/jquery.easyui/themes/icon.css">
+  <!-- bower:css -->
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+
+  <link rel="stylesheet" href="/styles/main.css">
+  <!-- endbuild -->
+</head>
+<body>
+<div>
+  <form id="edit_entity_form">
+    <label>Name
+      <input type="text" name="name"/>
+    </label>
+    <label>Description
+      <textarea name="description"></textarea>
+    </label>
+    <label>Create Time
+      <input name="createTime" disabled/>
+    </label>
+    <label>Update Time
+      <input name="updateTime" disabled/>
+    </label>
+  </form>
+</div>
+
+<table id="fields_grid" title="Column Group" class="easyui-datagrid"
+       singleSelect="true" iconCls="icon-save" rownumbers="true" width="100%"
+       data-options="toolbar:fieldsToolBar,pagination:true,
+				pageSize:10">
+  <thead>
+  <tr>
+    <th data-options="field:'id',width:'20%'">ID</th>
+    <th field="name" width="20%">Name</th>
+    <th field="description" width="20%">Description</th>
+    <th field="fieldType">Type</th>
+    <th field="length">Length</th>
+    <th field="ifNull">Can be Null?</th>
+    <th field="createTime" formatter="dateFormatter" width="20%">Create Time</th>
+    <th field="updateTime" formatter="dateFormatter" width="20%">Update Time</th>
+  </tr>
+  </thead>
+</table>
+
+
+<!-- build:js(.) scripts/vendor.js -->
+<script src="scripts/edit_entity.js"></script>
+<!-- bower:js -->
+<script src="../../bower_components/jquery/dist/jquery.js"></script>
+<script src="../../bower_components/jquery.easyui/jquery.easyui.min.js"></script>
+<script src="../../bower_components/jquery-cookie/jquery.cookie.js"></script>
+<script src="../../bower_components/store2/dist/store2.js"></script>
+<!-- endbower -->
+<script src="/scripts/oauth2.js"></script>
+<script src="/scripts/user.js"></script>
+<script src="/scripts/cookie.js"></script>
+<script src="/scripts/date-util.js"></script>
+<script src="/scripts/easyui-theme-change.js"></script>
+<script src="/scripts/jquery-loading.js"></script>
+<script src="/scripts/msg.js"></script>
+<!--<script src="../../scripts/main.js"></script>-->
+<!-- endbuild -->
+
+<script>getEntityDetail()</script>
+
+<div id="create_field_win" class="easyui-window" title="New Field"
+     data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:500px;height:200px;padding:10px;">
+  <form id="edit_field_form">
+    <input type="hidden" name="id">
+    <label>Name
+      <input type="text" name="name" required/>
+    </label>
+    <label>Length
+      <input type="number" name="length" min="0" max="64" required/>
+    </label>
+    <label>Type
+      <select name="fieldType" required>
+        <option value="string">String</option>
+        <option value="boolean">Boolean</option>
+        <option value="int">Integer</option>
+      </select>
+    </label>
+    <label>can be null?
+      <select name="ifNull" required>
+        <option value="false">No</option>
+        <option value="true">Yes</option>
+      </select>
+    </label>
+    <label>Description
+      <textarea name="description" required></textarea>
+    </label>
+    <input type="hidden" name="createTime">
+    <input type="hidden" name="updateTime">
+    <input type="hidden" name="deleted">
+  </form>
+  <button onclick="saveOrUpdateField()">Save</button>
+
+</div>
+</body>
+
+</html>

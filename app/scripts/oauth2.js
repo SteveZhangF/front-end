@@ -1,17 +1,19 @@
+ 'use strict';
 /**
  * Singleton used for Namespace
  */
+
 function oauth2() {
-  
+
 }
 
 /**
  * Wrap the API so we can proxy calls while testing.
  */
 oauth2.get = function (url, data, success, error) {
-  
+
   var authorization = oauth2.cookie.get('authToken')
-  
+
   var request = $.ajax({
     url: url,
     type: "GET",
@@ -25,7 +27,7 @@ oauth2.get = function (url, data, success, error) {
   request.done(success)
 
   request.fail(error)
-  
+
 }
 
 
@@ -58,7 +60,7 @@ oauth2.isIos = function () {
  * Wrap the API so we can proxy calls while testing.
  */
 oauth2.post = function (url, data, success, error) {
-  
+
   $.ajax({
     url: url,
     type: "POST",
@@ -69,16 +71,16 @@ oauth2.post = function (url, data, success, error) {
     error : error
   })
 
-  
+
 }
 
 /**
  * Post with authentication
  */
 oauth2.postAuth = function (url, data, success, error) {
-  
+
   var authorization = oauth2.cookie.get('authToken')
-  
+
   $.ajax({
     url: url,
     type: "POST",
@@ -91,8 +93,25 @@ oauth2.postAuth = function (url, data, success, error) {
     success : success,
     error : error
   })
+}
+/**
+ * Get with authentication
+ */
+oauth2.getWithAuth = function (url, success, error) {
 
-  
+  var authorization = oauth2.cookie.get('authToken')
+
+  $.ajax({
+    url: url,
+    type: "GET",
+    contentType: "application/json", // send as JSON
+    headers: {
+      'Authorization' : 'Bearer ' + authorization
+    },
+    dataType: "json",
+    success : success,
+    error : error
+  })
 }
 
 /**
@@ -100,7 +119,8 @@ oauth2.postAuth = function (url, data, success, error) {
  */
 oauth2.postClientAuth = function (url, data, success, error) {
 
-    var authorization = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse('353b302c44574f565045687e534e7d6a' + ':' + '286924697e615a672a646a493545646c'));
+    //var authorization = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse('353b302c44574f565045687e534e7d6a' + ':' + '286924697e615a672a646a493545646c'));
+  var authorization = btoa('353b302c44574f565045687e534e7d6a' + ':' + '286924697e615a672a646a493545646c');
 
   $.ajax({
     url: url,
@@ -122,8 +142,8 @@ oauth2.postClientAuth = function (url, data, success, error) {
  * Post with client basic authentication
  */
 oauth2.login = function (url, data, success, error) {
-
-  var authorization =  CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse('353b302c44574f565045687e534e7d6a' + ':' + '286924697e615a672a646a493545646c'));
+  //var authorization =  CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse('353b302c44574f565045687e534e7d6a' + ':' + '286924697e615a672a646a493545646c'));
+  var authorization = btoa('353b302c44574f565045687e534e7d6a' + ':' + '286924697e615a672a646a493545646c');
   $.ajax({
     url: url,
     type: "POST",
@@ -144,7 +164,7 @@ oauth2.login = function (url, data, success, error) {
  * Wrap the API so we can proxy calls while testing.
  */
 oauth2.put = function (url, data, success, error) {
-  
+
     var authorization = oauth2.cookie.get('authToken')
 
   $.ajax({
@@ -160,7 +180,7 @@ oauth2.put = function (url, data, success, error) {
     error : error
   })
 
-  
+
 }
 
 

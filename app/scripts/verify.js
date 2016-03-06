@@ -1,4 +1,6 @@
-oauth2.verify = {}
+
+ 'use strict';
+ oauth2.verify = {}
 
 /**
  * Sends an email to user for verification

@@ -27,5 +27,8 @@
   },
   "engines": {
     "node": ">=0.10.0"
+  },
+  "dependencies": {
+    "sha256": "^0.2.0"
   }
 }

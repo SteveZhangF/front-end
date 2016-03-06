@@ -10,7 +10,7 @@ var ajaxLoading = function ( text ){
     'use strict';
     if('undefined' === typeof arguments[0])
     {
-        text = '正在处理，请稍候。。。';
+        text = 'loading...';
     }
 
     $('<div class=\'datagrid-mask\'></div>').css({display:'block',width:'100%',height:$(window).height()}).appendTo('body');
