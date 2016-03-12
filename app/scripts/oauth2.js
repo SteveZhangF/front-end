@@ -70,8 +70,6 @@ oauth2.post = function (url, data, success, error) {
     success : success,
     error : error
   })
-
-
 }
 
 /**
@@ -80,7 +78,7 @@ oauth2.post = function (url, data, success, error) {
 oauth2.postAuth = function (url, data, success, error) {
 
   var authorization = oauth2.cookie.get('authToken')
-
+  url = "http://localhost:80/api/"+url;
   $.ajax({
     url: url,
     type: "POST",
@@ -94,6 +92,40 @@ oauth2.postAuth = function (url, data, success, error) {
     error : error
   })
 }
+
+ oauth2.deleteWithAuth = function (url, success, error) {
+
+   var authorization = oauth2.cookie.get('authToken')
+   url = "http://localhost:80/api/"+url;
+   $.ajax({
+     url: url,
+     type: "DELETE",
+     contentType: "application/json", // send as JSON
+     headers: {
+       'Authorization' : 'Bearer ' + authorization
+     },
+     dataType: "json",
+     success : success,
+     error : error
+   })
+ }
+
+ oauth2.putWithAuth = function (url,data,success,error) {
+   var authorization = oauth2.cookie.get('authToken');
+   url = "http://localhost:80/api/"+url;
+   $.ajax({
+     url: url,
+     type: "PUT",
+     contentType: "application/json", // send as JSON
+     data: JSON.stringify(data),
+     headers: {
+       'Authorization' : 'Bearer ' + authorization
+     },
+     dataType: "json",
+     success : success,
+     error : error
+   })
+ }
 /**
  * Get with authentication
  */

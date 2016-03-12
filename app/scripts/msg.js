@@ -76,3 +76,17 @@ var msgProgress = function (isShow, title, msg, text) {
         text:text
     });
 };
+
+/**
+ * msg error
+ * */
+
+var msgError = function (err) {
+  try {
+    var error = JSON.parse(err.responseText);
+    msgAlert(error.error_code, error.error_message, "i");
+  }
+  catch (e) {
+    msgAlert(err.statusText,"server error,please wait or contact us");
+  }
+}
