@@ -1,0 +1,28 @@
+<div>
+  <h1>Entities</h1>
+  <script src="scripts/entity/entities.js"></script>
+  <script>getEntities()</script>
+  <table id="entities_grid" title="Column Group" class="easyui-datagrid"
+         singleSelect="true" iconCls="icon-save" rownumbers="true" width="100%"
+         data-options="toolbar:entitiesToolBar,pagination:true,
+				pageSize:10">
+    <thead>
+    <tr>
+      <th data-options="field:'id',width:'20%'" >ID</th>
+      <th  field="name" width="20%">Name</th>
+      <th field="description" width="20%">Description</th>
+      <th  field="createTime"formatter="dateFormatter" width="20%">Create Time</th>
+      <th  field="updateTime"formatter="dateFormatter" width="20%">Update Time</th>
+    </tr>
+    </thead>
+
+  </table>
+</div>
+<div id="create_entity_win" class="easyui-window" title="New Entity" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:500px;height:200px;padding:10px;">
+  <form>
+    <label>Name
+      <input type="text" required/>
+    </label>
+  </form>
+
+</div>
