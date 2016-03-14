@@ -3,7 +3,6 @@
   "private": true,
   "dependencies": {
     "jquery": "~2.1.1",
-    "jquery.easyui": "*",
     "jquery-cookie": "~1.4.1",
     "store2": "store#~2.3.2"
   }

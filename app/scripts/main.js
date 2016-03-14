@@ -278,7 +278,7 @@ function init() {
         content.panel({
           width: 200,
           border: false,
-          title: '更换皮肤',
+          title: 'Change Themes',
           href: 'app/theme/index.html'
         });
       },
@@ -304,18 +304,6 @@ function init() {
   })
 }
 
-$(document).ready(function () {
-  if (!oauth2.user.is_logged_in()) {
-    $('#login_win').window('open');
-  } else {
-    oauth2.user.get(function () {
-      $('#login_win').window('close');
-      msgShow('Success', 'Login success!');
-      $('#person_detail_id').text(oauth2.user.user.emailAddress);
-      init();
-    });
-  }
-});
 
 function logout() {
   oauth2.user.logout();

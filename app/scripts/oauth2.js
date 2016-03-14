@@ -6,7 +6,7 @@
 function oauth2() {
 
 }
-
+oauth2.url = "http://ec2-user@ec2-52-36-200-2.us-west-2.compute.amazonaws.com/api/oncore/";
 /**
  * Wrap the API so we can proxy calls while testing.
  */
@@ -78,7 +78,7 @@ oauth2.post = function (url, data, success, error) {
 oauth2.postAuth = function (url, data, success, error) {
 
   var authorization = oauth2.cookie.get('authToken')
-  url = "http://localhost:80/api/"+url;
+  url = oauth2.url+url;
   $.ajax({
     url: url,
     type: "POST",
@@ -96,7 +96,7 @@ oauth2.postAuth = function (url, data, success, error) {
  oauth2.deleteWithAuth = function (url, success, error) {
 
    var authorization = oauth2.cookie.get('authToken')
-   url = "http://localhost:80/api/"+url;
+   url = oauth2.url+url;
    $.ajax({
      url: url,
      type: "DELETE",
@@ -112,7 +112,7 @@ oauth2.postAuth = function (url, data, success, error) {
 
  oauth2.putWithAuth = function (url,data,success,error) {
    var authorization = oauth2.cookie.get('authToken');
-   url = "http://localhost:80/api/"+url;
+   url = oauth2.url+url;
    $.ajax({
      url: url,
      type: "PUT",
@@ -130,7 +130,7 @@ oauth2.postAuth = function (url, data, success, error) {
  * Get with authentication
  */
 oauth2.getWithAuth = function (url, success, error) {
-  url="http://localhost/api/"+url;
+  url = oauth2.url+url;
   var authorization = oauth2.cookie.get('authToken')
 
   $.ajax({
@@ -150,7 +150,7 @@ oauth2.getWithAuth = function (url, success, error) {
  * Post with client basic authentication
  */
 oauth2.postClientAuth = function (url, data, success, error) {
-  url = "http://localhost/api/"+url;
+  url = oauth2.url+url;
     //var authorization = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse('353b302c44574f565045687e534e7d6a' + ':' + '286924697e615a672a646a493545646c'));
   var authorization = btoa('353b302c44574f565045687e534e7d6a' + ':' + '286924697e615a672a646a493545646c');
 

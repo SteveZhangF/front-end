@@ -2,16 +2,14 @@
 <html class="no-js">
 <head>
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!-- build:css(.) styles/vendor.css -->
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <link id="easyui_theme_id" rel="stylesheet" type="text/css"
-        href="../../bower_components/jquery.easyui/themes/default/easyui.css">
-  <link rel="stylesheet" type="text/css" href="../../bower_components/jquery.easyui/themes/icon.css">
+        href="../../lib2/jquery.easyui/themes/default/easyui.css">
+  <link rel="stylesheet" type="text/css" href="../../lib2/jquery.easyui/themes/icon.css">
   <!-- bower:css -->
   <!-- endbower -->
-  <!-- endbuild -->
-  <!-- build:css(.tmp) styles/main.css -->
-
-  <link rel="stylesheet" href="/styles/main.css">
+  <!-- build:css(.) ../../styles/main.min.css -->
+  <link rel="stylesheet" href="styles/main.css">
   <!-- endbuild -->
 </head>
 <body>
@@ -205,24 +203,24 @@
   <div onclick="deleteNode()" data-options="iconCls:'icon-add'">Delete</div>
 </div>
 
-<!-- build:js(.) scripts/vendor.js -->
-<script src="scripts/edit_module.js"></script>
+<!-- build:js(.) ../../scripts/vendor.min.js -->
 <!-- bower:js -->
-<script src="../../bower_components/jquery/dist/jquery.js"></script>
-<script src="../../bower_components/jquery.easyui/jquery.easyui.min.js"></script>
-<script src="../../bower_components/jquery-cookie/jquery.cookie.js"></script>
-<script src="../../bower_components/store2/dist/store2.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/jquery-cookie/jquery.cookie.js"></script>
+<script src="bower_components/store2/dist/store2.js"></script>
 <!-- endbower -->
-<script src="/scripts/oauth2.js"></script>
-<script src="/scripts/user.js"></script>
-<script src="/scripts/cookie.js"></script>
-<script src="/scripts/date-util.js"></script>
-<script src="/scripts/easyui-theme-change.js"></script>
-<script src="/scripts/jquery-loading.js"></script>
-<script src="/scripts/msg.js"></script>
-<!--<script src="../../scripts/main.js"></script>-->
 <!-- endbuild -->
-
+<!-- build:js(.) ../../scripts/main.min.js -->
+<script src="scripts/edit_module.js"></script>
+<script src="../scripts/oauth2.js"></script>
+<script src="../scripts/user.js"></script>
+<script src="../scripts/cookie.js"></script>
+<script src="../scripts/date-util.js"></script>
+<script src="../scripts/easyui-theme-change.js"></script>
+<script src="../scripts/jquery-loading.js"></script>
+<script src="../scripts/msg.js"></script>
+<!-- endbuild -->
+<script src="../../lib2/jquery.easyui/jquery.easyui.min.js"></script>
 <script>getModuleDetail()</script>
 </body>
 

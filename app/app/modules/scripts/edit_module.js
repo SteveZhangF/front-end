@@ -157,7 +157,7 @@ function myLoadFilter(data, parent) {
         });
         folders.onSelect = function () {
           $('#edit_entity_node').css("display", "none");
-          $('#edit_node').css("display", "none");
+          $('#edit_node').css("display", "");
           $('#edit_report_node').css("display", 'none');
           showChildrenInDataGrid(folders);
           taglePropertyForm(false);
@@ -451,21 +451,21 @@ function showAddReport() {
     updateTime: '',
     createTime: '',
     folderId: folderId,
-    id:undefined
+    id: undefined
   });
   iniTiny();
-  tinyMCE.get('report_content').getBody().innerHTML='';
+  tinyMCE.get('report_content').getBody().innerHTML = '';
 
 }
 
-function iniTiny(){
+function iniTiny() {
   tinymce.init({
     selector: '#report_content',
     br_in_pre: false,
     height: 400,
     encoding: 'xml',
-    extended_valid_elements : 'field[id,name]',
-    custom_elements : '~field',
+    extended_valid_elements: 'field[id|name]',
+    custom_elements: '~field',
     plugins: [
       'advlist autolink lists link image charmap print preview anchor',
       'searchreplace visualblocks code fullscreen',
@@ -487,7 +487,7 @@ function iniTiny(){
     },
   });
 }
-function selectReport(){
+function selectReport() {
   var report = getSelectedNode();
   $('#edit_entity_node').css("display", "none");
   $('#edit_node').css("display", "none");
@@ -501,8 +501,8 @@ function selectReport(){
     id: report.id,
     folderId: report.folderId
   });
-  oauth2.getWithAuth('/admin/reports/'+report.id+"/", function (data) {
-    tinyMCE.get('report_content').getBody().innerHTML=data.content;
+  oauth2.getWithAuth('/admin/reports/' + report.id + "/", function (data) {
+    tinyMCE.get('report_content').getBody().innerHTML = data.content;
   }, function (err) {
 
   });
@@ -518,7 +518,7 @@ function getEntitiesAndFieldForMenu(editor) {
     entity.fields.forEach(function (field) {
       m.menu.push({
         text: field.name, onclick: function () {
-          editor.insertContent("<span style=\"text-decoration: underline;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<field id='" + field.id + "' name='"+entity.name+"_"+field.name+"'></field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>");
+          editor.insertContent("<span style=\"text-decoration: underline;\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<field id='" + field.id + "' name='" + entity.name + "_" + field.name + "'></field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>");
         }
       });
     });
@@ -527,11 +527,34 @@ function getEntitiesAndFieldForMenu(editor) {
   return menu;
 }
 
-
+function checkReport(content) {
+  try {
+    var xml_head = "<?xml version=\"1.1\" ?><!DOCTYPE naughtyxml [<!ENTITY nbsp \"&#0160;\"><!ENTITY copy \"&#0169;\">" +
+      "" + "<!ENTITY rsquo   \"&#x20199;\">" +
+      "" + "<!ENTITY ldquo   \"&#8220;\">" +
+      "" + "<!ENTITY rdquo   \"&#8221;\">" +
+      "]>";
+    //content =  xml_head+content;
+    //content = $.parseHTML(content);
+    content = "<body>" + content + '</body>';
+    var xml = $.parseXML(xml_head + content);
+    return content;
+  } catch (e) {
+    console.log(e);
+    msgAlert("Error", "Please check the format, delete all single tag.(\'<br/>\')");
+    return false;
+  }
+}
 function updateReport() {
   var report = $("#edit_select_report_form").serializeObject();
-  report.content = tinyMCE.get('report_content').getContent();
-  console.log(report);
+  var content = tinyMCE.get('report_content').getContent();
+  var result = checkReport(content);
+  if (!result) {
+    return;
+  }
+  report.content = result;
+  console.log(result);
+  console.log('report format pass');
   if (report.id) {
 
   } else {

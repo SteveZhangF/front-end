@@ -5,16 +5,14 @@
   <title>Oshaippa</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
-  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="shortcut icon" href="favicon.ico">
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-  <!-- build:css(.) styles/vendor.css -->
   <link id="easyui_theme_id" rel="stylesheet" type="text/css"
-        href="bower_components/jquery.easyui/themes/default/easyui.css">
-  <link rel="stylesheet" type="text/css" href="bower_components/jquery.easyui/themes/icon.css">
+        href="lib2/jquery.easyui/themes/default/easyui.css">
+  <link rel="stylesheet" type="text/css" href="lib2/jquery.easyui/themes/icon.css">
   <!-- bower:css -->
   <!-- endbower -->
-  <!-- endbuild -->
-  <!-- build:css(.tmp) styles/main.css -->
+  <!-- build:css(.) styles/main.min.css -->
   <link rel="stylesheet" href="styles/main.css">
   <!-- endbuild -->
 </head>
@@ -45,7 +43,7 @@
   </div>
 
   <div id="person_menu_id" style="width:90px;">
-    <div onclick="javascript:addTabHref('个人设置','app/personal/index.html' );return false;"> Setting</div>
+    <div onclick="javascript:addTabHref('Setting','app/personal/index.html' );return false;"> Setting</div>
     <div onclick="javascript:logout();return false;">Log Out</div>
   </div>
 
@@ -106,15 +104,15 @@
     </div>
   </form>
 </div>
-<!-- build:js(.) scripts/vendor.js -->
+
+<!-- build:js(.) scripts/vendor.min.js -->
 <!-- bower:js -->
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/jquery.easyui/jquery.easyui.min.js"></script>
-<script src="bower_components/jquery-cookie/jquery.cookie.js"></script>
-<script src="bower_components/store2/dist/store2.js"></script>
+<script src="lib/jquery/jquery.js"></script>
+<script src="lib/jquery-cookie/jquery.cookie.js"></script>
+<script src="lib/store2/store2.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
-
+<script src="lib2/jquery.easyui/jquery.easyui.min.js"></script>
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID.
 <script>
   (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -125,7 +123,7 @@
   ga('create','UA-XXXXX-X');ga('send','pageview');
 </script>
 -->
-<!-- build:js({app,.tmp}) scripts/main.js -->
+<!-- build:js({.}) scripts/main.min.js -->
 <script src="scripts/oauth2.js"></script>
 <script src="scripts/user.js"></script>
 <script src="scripts/cookie.js"></script>
@@ -134,7 +132,21 @@
 <script src="scripts/jquery-loading.js"></script>
 <script src="scripts/msg.js"></script>
 <script src="scripts/main.js"></script>
-
 <!-- endbuild -->
+
+<script>
+  $(document).ready(function () {
+    if (!oauth2.user.is_logged_in()) {
+      $('#login_win').window('open');
+    } else {
+      oauth2.user.get(function () {
+        $('#login_win').window('close');
+        msgShow('Success', 'Login success!');
+        $('#person_detail_id').text(oauth2.user.user.emailAddress);
+        init();
+      });
+    }
+  });
+</script>
 </body>
 </html>
