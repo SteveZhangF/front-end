@@ -529,11 +529,12 @@ function getEntitiesAndFieldForMenu(editor) {
 
 function checkReport(content) {
   try {
-    var xml_head = "<?xml version=\"1.1\" ?><!DOCTYPE naughtyxml [<!ENTITY nbsp \"&#0160;\"><!ENTITY copy \"&#0169;\">" +
-      "" + "<!ENTITY rsquo   \"&#x20199;\">" +
-      "" + "<!ENTITY ldquo   \"&#8220;\">" +
-      "" + "<!ENTITY rdquo   \"&#8221;\">" +
-      "]>";
+    //var xml_head = "<?xml version=\"1.1\" ?><!DOCTYPE naughtyxml [<!ENTITY nbsp \"&#0160;\"><!ENTITY copy \"&#0169;\">" +
+    //  "" + "<!ENTITY rsquo   \"&#x20199;\">" +
+    //  "" + "<!ENTITY ldquo   \"&#8220;\">" +
+    //  "" + "<!ENTITY rdquo   \"&#8221;\">" +
+    //  "]>";
+    var xml_head = "<?xml version=\"1.1\" ?><!DOCTYPE naughtyxml [<!ENTITY nbsp \"&#0160;\"><!ENTITY copy \"&#0169;\"><!ENTITY rsquo   \"&#x20199;\"><!ENTITY ldquo   \"&#8220;\"><!ENTITY rdquo   \"&#8221;\"><!ENTITY ndash  \"&#x2013;\" > <!ENTITY mdash  \"&#x2014;\" ><!ENTITY lsquo   \"&#8216;\">]>	"
     //content =  xml_head+content;
     //content = $.parseHTML(content);
     content = "<body>" + content + '</body>';
