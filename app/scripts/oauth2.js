@@ -7,13 +7,14 @@ function oauth2() {
 
 }
 oauth2.url = "http://ec2-user@ec2-52-36-200-2.us-west-2.compute.amazonaws.com/api/oncore/";
+
+
 /**
  * Wrap the API so we can proxy calls while testing.
  */
 oauth2.get = function (url, data, success, error) {
 
-  var authorization = oauth2.cookie.get('authToken')
-
+  var authorization = oauth2.cookie.get('authToken');
   var request = $.ajax({
     url: url,
     type: "GET",
@@ -31,11 +32,11 @@ oauth2.get = function (url, data, success, error) {
 }
 
 
-/**
- * Get a query string var
- * @param {string}
- * @return {string}
- */
+ /**
+  * Get a query string var
+  * @return {string}
+  * @param name
+  */
 oauth2.get_query = function (name) {
   var query = window.location.search.substring(1)
   var vars = query.split('&')
@@ -70,7 +71,7 @@ oauth2.post = function (url, data, success, error) {
     success : success,
     error : error
   })
-}
+};
 
 /**
  * Post with authentication

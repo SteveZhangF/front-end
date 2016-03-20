@@ -488,6 +488,8 @@ function iniTiny() {
   });
 }
 function selectReport() {
+  iniTiny();
+  ajaxLoading();
   var report = getSelectedNode();
   $('#edit_entity_node').css("display", "none");
   $('#edit_node').css("display", "none");
@@ -502,12 +504,22 @@ function selectReport() {
     folderId: report.folderId
   });
   oauth2.getWithAuth('/admin/reports/' + report.id + "/", function (data) {
-    tinyMCE.get('report_content').getBody().innerHTML = data.content;
+    $.ajax({
+      url: data,
+      success: function (data) {
+        tinyMCE.get('report_content').getBody().innerHTML = data.content;
+        console.log(data)
+        ajaxLoadEnd();
+      },
+      error: function (err) {
+        ajaxLoadEnd();
+        msgAlert(err.statusText, "File Not Found!", "i");
+      }
+
+    });
   }, function (err) {
-
+    msgError(err);
   });
-  iniTiny();
-
 }
 function getEntitiesAndFieldForMenu(editor) {
   var root = $("#module_tree").tree('getRoots');
@@ -542,7 +554,7 @@ function checkReport(content) {
     return content;
   } catch (e) {
     console.log(e);
-    msgAlert("Error", "Please check the format, delete all single tag.(\'<br/>\')");
+    msgAlert("Error", "Please check the format, click Tools--> Source Code, copy all code and go to  <a hrel=\"http://www.freeformatter.com/xml-formatter.html\">http://www.freeformatter.com/xml-formatter.html</a>");
     return false;
   }
 }
