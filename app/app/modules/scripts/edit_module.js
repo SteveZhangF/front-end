@@ -505,10 +505,10 @@ function selectReport() {
   });
   oauth2.getWithAuth('/admin/reports/' + report.id + "/", function (data) {
     $.ajax({
-      url: data,
-      success: function (data) {
-        tinyMCE.get('report_content').getBody().innerHTML = data.content;
-        console.log(data)
+      url: data.content,
+      success: function (content) {
+        tinyMCE.get('report_content').getBody().innerHTML = content;
+        console.log(content)
         ajaxLoadEnd();
       },
       error: function (err) {
