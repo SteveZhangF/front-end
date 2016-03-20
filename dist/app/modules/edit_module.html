@@ -124,7 +124,7 @@
 								data:[{name:'string',value:'string'},{name:'integer',value:'int'},{name:'boolean',value:'boolean'},{name:'upload',value:'upload'}]
 							}}">Type
             </th>
-            <th field="isNull" data-options="editor:{type:'checkbox',options:{on:'true',off:'false'}}">can be null?</th>
+            <th field="ifNull" data-options="editor:{type:'checkbox',options:{on:'true',off:'false'}}">can be null?</th>
             <th field="length" data-options="
 						editor:{
 							type:'numberbox',
@@ -132,6 +132,9 @@
             </th>
             <th field="createTime" formatter="dateFormatter">Create Time</th>
             <th field="updateTime" formatter="dateFormatter">Update Time</th>
+
+            <th field="deleted" data-options="editor:{type:'checkbox',options:{on:'true',off:'false'}}">deleted?</th>
+
           </tr>
           </thead>
         </table>

@@ -503,6 +503,7 @@ function selectReport() {
     id: report.id,
     folderId: report.folderId
   });
+  tinyMCE.get('report_content').getBody().innerHTML ="";
   oauth2.getWithAuth('/admin/reports/' + report.id + "/", function (data) {
     $.ajax({
       url: data.content,
