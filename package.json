@@ -3,14 +3,67 @@
     "node": ">= 0.10.0"
   },
   "devDependencies": {
+    "connect-livereload": "^0.5.4",
     "grunt": "~0.4.5",
     "grunt-bower": "^0.21.0",
     "grunt-bower-task": "^0.4.0",
     "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-connect": "^0.8.0",
     "grunt-contrib-cssmin": "^1.0.0",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-contrib-qunit": "~0.5.2",
     "grunt-contrib-uglify": "~0.5.0",
-    "grunt-contrib-watch": "~0.6.1"
-  }
+    "grunt-contrib-watch": "^0.6.1"
+  },
+  "name": "oncore-admin",
+  "description": "easyui-scaffold ================ Easyui-scaffold is a front-end development of scaffold,  which based on the [Easyui](http://www.jeasyui.com) and [jquery-easyui](https://github.com/waylau/jquery-easyui). The rapid establishment of enterprise application model.",
+  "version": "1.0.0",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "apache-server-configs": "^2.14.0",
+    "grunt-autoprefixer": "^1.0.1",
+    "grunt": "^0.4.5",
+    "grunt-bower-task": "^0.4.0",
+    "grunt-contrib-concat": "^0.4.0",
+    "grunt-concurrent": "^0.5.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-cssmin": "^1.0.0",
+    "grunt-bower": "^0.21.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-connect": "^0.8.0",
+    "grunt-contrib-htmlmin": "^0.3.0",
+    "grunt-contrib-qunit": "^0.5.2",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-imagemin": "^0.8.1",
+    "grunt-contrib-uglify": "^0.5.1",
+    "grunt-init": "^0.3.2",
+    "grunt-newer": "^0.7.0",
+    "grunt-rev": "^0.1.0",
+    "grunt-mocha": "^0.4.15",
+    "grunt-wiredep": "^1.9.0",
+    "grunt-svgmin": "^0.4.0",
+    "grunt-usemin": "^3.1.1",
+    "jshint-stylish": "^0.4.0",
+    "load-grunt-tasks": "^0.4.0",
+    "sha256": "^0.2.0",
+    "save": "^2.3.0",
+    "time-grunt": "^0.4.0"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SteveZhangF/front-end.git"
+  },
+  "author": "steve",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SteveZhangF/front-end/issues"
+  },
+  "homepage": "https://github.com/SteveZhangF/front-end#readme"
 }

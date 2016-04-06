@@ -1,0 +1,213 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link id="easyui_theme_id" rel="stylesheet" type="text/css"
+        href="../../lib2/jquery.easyui/themes/default/easyui.css">
+  <link rel="stylesheet" type="text/css" href="../../lib2/jquery.easyui/themes/icon.css">
+  <!-- bower:css -->
+  <!-- endbower -->
+  <link rel="stylesheet" href="../../styles/main.min.css">
+</head>
+<body>
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+
+<div>
+  <form id="edit_module_form">
+    <label>Name
+      <input type="text" name="name"/>
+    </label>
+    <label>Description
+      <textarea name="description"></textarea>
+    </label>
+    <label>Create Time
+      <input name="createTime" disabled/>
+    </label>
+    <label>Update Time
+      <input name="updateTime" disabled/>
+    </label>
+    <input type="hidden" name="id"/>
+    <button onclick="updateModule()">Update</button>
+  </form>
+</div>
+<div style="padding:5px;height: 600px" class="easyui-layout">
+  <div class="" data-options="region:'west' ,title:'All Files',split:true" style="padding:5px;width:25%;height: 100%;">
+    <ul class="easyui-tree" id="module_tree"></ul>
+  </div>
+  <div data-options="region:'center'" style="padding:5px;width:65%;height: 100%;">
+
+    <div id="edit_node" class="easyui-layout" data-options="fit:true">
+      <div id="edit_select_folder" style="padding:5px;width:100%;height: 25%;"
+           data-options="region:'north',title:'base info',split:true">
+        <form id="edit_select_folder_form">
+          <label>Name:
+            <input type="text" name="name"/>
+          </label>
+          <label>Description:
+            <textarea name="description">
+            </textarea>
+          </label>
+          <label>Create Time:
+            <input name="createTime" disabled/>
+          </label>
+          <label>Update Time:
+            <input name="updateTime" disabled/>
+          </label>
+          <input type="hidden" name="id"/>
+        </form>
+        <button onclick="updateElement()">Update Node</button>
+      </div>
+      <div id="data_grid_div" data-options="region:'center',split:true">
+        <table id="root_folders_grid" title="Elements" class="easyui-datagrid"
+               singleSelect="true" iconCls="icon-save" rownumbers="true" width="100%"
+               data-options="toolbar:root_folders_ToolBar,pagination:true,fit:true,
+				pageSize:10">
+          <thead>
+          <tr>
+            <th data-options="field:'id',width:'20%'">ID</th>
+            <th field="name" width="20%">Name</th>
+            <th field="description" width="20%">Description</th>
+            <th field="createTime" formatter="dateFormatter" width="20%">Create Time</th>
+            <th field="updateTime" formatter="dateFormatter" width="20%">Update Time</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+    <div id="edit_entity_node" class="easyui-layout" data-options="fit:true">
+      <div id="edit_select_entity" style="padding:5px;width:100%;height: 25%;"
+           data-options="region:'north',title:'base info',split:true">
+        <form id="edit_select_entity_form">
+          <label>Name:
+            <input type="text" name="name"/>
+          </label>
+          <label>Description:
+            <textarea name="description">
+            </textarea>
+          </label>
+          <label>Create Time:
+            <input name="createTime" disabled/>
+          </label>
+          <label>Update Time:
+            <input name="updateTime" disabled/>
+          </label>
+          <input type="hidden" name="id"/>
+        </form>
+        <button onclick="updateElement()">Update Node</button>
+      </div>
+      <div id="data_grid_entity_div" style="height: 60%" data-options="region:'center',split:true">
+        <table id="entity_field_grid" title="Fields" class="easyui-datagrid"
+               singleSelect="true" iconCls="icon-save" rownumbers="true" width="100%"
+               data-options="toolbar:tb,pagination:true,fit:true,fitColumns:true,
+				pageSize:10,onClickRow:onClickRow">
+          <thead>
+          <tr>
+            <th data-options="field:'id',width:'20%'">ID</th>
+            <th field="name" data-options="
+						editor:{
+							type:'textbox',
+							options:{required:true}
+						}">Name
+            </th>
+            <th field="description" data-options="
+						editor:{
+							type:'textbox',
+						}">Description
+            </th>
+            <th field="fieldType" data-options="
+            editor:{type:'combobox',
+							options:{
+								valueField:'value',
+								textField:'name',
+								required:true,
+								data:[{name:'string',value:'string'},{name:'integer',value:'int'},{name:'boolean',value:'boolean'},{name:'upload',value:'upload'}]
+							}}">Type
+            </th>
+            <th field="ifNull" data-options="editor:{type:'checkbox',options:{on:'true',off:'false'}}">can be null?</th>
+            <th field="length" data-options="
+						editor:{
+							type:'numberbox',
+						}">length
+            </th>
+            <th field="createTime" formatter="dateFormatter">Create Time</th>
+            <th field="updateTime" formatter="dateFormatter">Update Time</th>
+
+            <th field="deleted" data-options="editor:{type:'checkbox',options:{on:'true',off:'false'}}">deleted?</th>
+
+          </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+
+    <div id="edit_report_node" class="easyui_layout" data-options="fit:true">
+      <div id="edit_select_report" style="padding:5px;width:100%;height: 25%;"
+           data-options="region:'north',title:'base info',split:true">
+        <form id="edit_select_report_form">
+          <label>Name:
+            <input type="text" name="name"/>
+          </label>
+          <label>Description:
+            <textarea name="description">
+            </textarea>
+          </label>
+          <label>Create Time:
+            <input name="createTime" disabled/>
+          </label>
+          <label>Update Time:
+            <input name="updateTime" disabled/>
+          </label>
+          <input type="hidden" name="id"/>
+          <input type="hidden" name="folderId"/>
+        </form>
+        <button onclick="updateReport()">Update Report</button>
+      </div>
+      <div id="report_content_div" style="height: 60%" data-options="region:'center',split:true">
+        <textarea id="report_content"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="tb" style="height:auto">
+  <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true"
+     onclick="append()">Append</a>
+  <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true"
+     onclick="removeit()">Remove</a>
+  <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true"
+     onclick="accept()">Accept</a>
+  <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true"
+     onclick="reject()">Reject</a>
+  <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true"
+     onclick="getChanges()">GetChanges</a>
+</div>
+<div id="create_folder_win" class="easyui-window" title="New Folder"
+     data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:500px;height:200px;padding:10px;">
+  <form id="create_folder_form">
+    <label>Name
+      <input type="text" id="new_folder_name" name="name" required/>
+    </label>
+    <label>Description
+      <textarea type="text" id="new_folder_description" name="description" required></textarea>
+    </label>
+  </form>
+  <button onclick="createFolder($('#create_folder_form'))">Create</button>
+</div>
+
+
+<!--context menu of tree-->
+<div id="folder_context_menu" class="easyui-menu" style="width:120px;">
+  <div onclick="deleteNode()" data-options="iconCls:'icon-remove'">Delete</div>
+  <div onclick="showAddReport()" data-options="iconCls:'icon-add'">Add Report</div>
+</div>
+<div id="entity_context_menu" class="easyui-menu" style="width:120px;">
+  <div onclick="deleteNode()" data-options="iconCls:'icon-add'">Delete</div>
+</div>
+
+<script src="../../scripts/vendor.min.js"></script>
+<script src="../../scripts/main.min.js"></script>
+<script src="../../lib2/jquery.easyui/jquery.easyui.min.js"></script>
+<script>getModuleDetail()</script>
+</body>
+
+</html>

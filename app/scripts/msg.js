@@ -80,8 +80,21 @@ var msgProgress = function (isShow, title, msg, text) {
 /**
  * msg error
  * */
-
+var msgValidationError = function (err) {
+  var msg = "";
+  var validations = err.error_validations;
+  if (!validations)
+    return;
+  var keys = Object.keys(validations);
+  if (keys.length) {
+    keys.forEach(function (k) {
+      msg = msg + k + ":" + validations[k] + "<br/>";
+    });
+    msgAlert(err.error_message, msg, "i");
+  }
+}
 var msgError = function (err) {
+
   try {
     var error = JSON.parse(err.responseText);
     if (!error.error_validations) {
@@ -93,17 +106,5 @@ var msgError = function (err) {
   catch (e) {
     msgAlert(err.statusText, "server error,please wait or contact us");
   }
-  var msgValidationError = function (err) {
-    var msg = "";
-    var validations = err.error_validations;
-    if (!validations)
-      return;
-    var keys = Object.keys(validations);
-    if (keys.length) {
-      keys.forEach(function (k) {
-        msg = msg + k + ":" + validations[k] + "<br/>";
-      });
-      msgAlert(err.error_message, msg, "i");
-    }
-  }
+
 }

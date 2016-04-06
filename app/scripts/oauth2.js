@@ -6,8 +6,8 @@
 function oauth2() {
 
 }
-oauth2.url = "http://ec2-user@ec2-52-36-200-2.us-west-2.compute.amazonaws.com/api/oncore/";
-
+oauth2.url = "http://ec2-54-210-205-19.compute-1.amazonaws.com/admin/oncore/";
+//oauth2.url="http://localhost/admin/";
 
 /**
  * Wrap the API so we can proxy calls while testing.
@@ -133,7 +133,7 @@ oauth2.postAuth = function (url, data, success, error) {
 oauth2.getWithAuth = function (url, success, error) {
   url = oauth2.url+url;
   var authorization = oauth2.cookie.get('authToken')
-
+  console.log(url);
   $.ajax({
     url: url,
     type: "GET",

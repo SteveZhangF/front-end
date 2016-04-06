@@ -37,7 +37,13 @@ function getModuleDetail() {
             $('#entity_context_menu').menu('show', {
               left: e.pageX,
               top: e.pageY
-            })
+            });
+          if (node.id && node.type =='report'){
+            $('#report_context_menu').menu('show', {
+              left: e.pageX,
+              top: e.pageY
+            });
+          }
         }
       });
       ajaxLoadEnd();
@@ -400,12 +406,17 @@ function createFolder(f) {
     })
   }
 }
-
+/**
+ *
+ * select element in folder grids
+ * */
 function editRootFolder() {
   var selected = $('#root_folders_grid').datagrid('getSelected');
+  console.log(selected);
   var selectedNode = $('#module_tree').tree('find', selected.id);
-  selectedNode.onSelect();
   $('#module_tree').tree('select', selectedNode.target);
+  selectedNode.onSelect();
+
 }
 /**
  * select folder root node end
@@ -420,8 +431,29 @@ function deleteNode() {
     if (node.type == "entity") {
       deleteEntity(node);
     }
+    if(node.type=='report'){
+      deleteReport(node);
+    }
   }
 }
+
+function deleteReport(report) {
+  ajaxLoading();
+  oauth2.deleteWithAuth("/admin/reports/" + report.id + "/", function (data) {
+    ajaxLoadEnd();
+    getModuleDetail();
+  }, function (err) {
+    console.log(err);
+    ajaxLoadEnd();
+    if (err.status == 200) {
+      msgAlert("Success", "Deleted!");
+      getModuleDetail();
+    } else {
+      msgError(err);
+    }
+  })
+}
+
 
 function deleteEntity(entity) {
   ajaxLoading();
@@ -570,10 +602,25 @@ function updateReport() {
   console.log(result);
   console.log('report format pass');
   if (report.id) {
+    ajaxLoading();
+    oauth2.putWithAuth('/admin/reports/' + report.id + '/', report, function (data) {
 
+
+
+      ajaxLoadEnd();
+    }, function (err) {
+      console.log(err);
+      if(err.status!=200) {
+        msgError(err);
+      }else{
+        msgAlert('Success','Success','i');
+      }
+      ajaxLoadEnd();
+    })
   } else {
     ajaxLoading();
     oauth2.postAuth('/admin/folders/' + report.folderId + '/reports/', report, function (data) {
+
       ajaxLoadEnd();
     }, function (err) {
       console.log(err);

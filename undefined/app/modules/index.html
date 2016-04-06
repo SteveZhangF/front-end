@@ -1,0 +1,31 @@
+<div>
+  <h1>Modules</h1>
+  <script src="scripts/modules.js"></script>
+  <script>getModules()</script>
+  <table id="modules_grid" title="Column Group" class="easyui-datagrid"
+         singleSelect="true" iconCls="icon-save" rownumbers="true" width="100%"
+         data-options="toolbar:modulesToolBar,pagination:true,
+				pageSize:10">
+    <thead>
+    <tr>
+      <th data-options="field:'id',width:'20%'" >ID</th>
+      <th  field="name" width="20%">Name</th>
+      <th field="description" width="20%">Description</th>
+      <th  field="createTime"formatter="dateFormatter" width="20%">Create Time</th>
+      <th  field="updateTime"formatter="dateFormatter" width="20%">Update Time</th>
+    </tr>
+    </thead>
+
+  </table>
+</div>
+<div id="create_module_win" class="easyui-window" title="New Module" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:500px;height:200px;padding:10px;">
+  <form id="create_module_form">
+    <label>Name
+      <input type="text" id="new_module_name" name="name"required/>
+    </label>
+    <label>Description
+      <textarea type="text" id="new_module_description" name="description" required></textarea>
+    </label>
+  </form><button onclick="createModule($('#create_module_form'))">Submit</button>
+
+</div>

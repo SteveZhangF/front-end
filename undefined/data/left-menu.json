@@ -1,0 +1,19 @@
+[
+    {
+        "group": "Users",
+        "icon":"icon-man",
+        "data": [
+            {
+                "title": "Users",
+                "icon": "images/left-menu/edit_48.png",
+                "url": "app/users/index.html",
+                "type":1
+            },
+          { "title":"Modules",
+            "icon":"images/left-menu/edit_48.png",
+            "url": "app/modules/index.html",
+            "type":1
+          }
+        ]
+    }
+]
